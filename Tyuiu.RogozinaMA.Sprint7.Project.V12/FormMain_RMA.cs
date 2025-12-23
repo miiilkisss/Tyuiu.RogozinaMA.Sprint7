@@ -6,6 +6,7 @@ using Tyuiu.RogozinaMA.Sprint7.Project.V12.Lib;
 
 namespace Tyuiu.RogozinaMA.Sprint7.Project.V12
 {
+
     public partial class FormMain_RMA : Form
     {
         private DataService dataService = new DataService();
@@ -15,17 +16,16 @@ namespace Tyuiu.RogozinaMA.Sprint7.Project.V12
         public FormMain_RMA()
         {
             InitializeComponent();
-            CreateDataGridViewColumns(); // СОЗДАЕМ КОЛОНКИ СРАЗУ!
+            CreateDataGridViewColumns(); 
             InitForm();
         }
 
-        // ГАРАНТИРОВАННО СОЗДАЕМ КОЛОНКИ ПРИ ЗАПУСКЕ
+       
         private void CreateDataGridViewColumns()
         {
-            // Очищаем, если что-то было
             dataGridViewComputers_RMA.Columns.Clear();
             
-            // Создаем колонки
+          
             dataGridViewComputers_RMA.Columns.Add("Manufacturer", "Производитель 🏢");
             dataGridViewComputers_RMA.Columns.Add("Processor", "Процессор ⚡");
             dataGridViewComputers_RMA.Columns.Add("Frequency", "Частота 🌟");
@@ -33,7 +33,7 @@ namespace Tyuiu.RogozinaMA.Sprint7.Project.V12
             dataGridViewComputers_RMA.Columns.Add("HDD", "HDD 💿");
             dataGridViewComputers_RMA.Columns.Add("Date", "Дата 📅");
             
-            // Настройка ширины
+          
             dataGridViewComputers_RMA.Columns[0].Width = 120;
             dataGridViewComputers_RMA.Columns[1].Width = 140;
             dataGridViewComputers_RMA.Columns[2].Width = 90;
@@ -41,7 +41,7 @@ namespace Tyuiu.RogozinaMA.Sprint7.Project.V12
             dataGridViewComputers_RMA.Columns[4].Width = 80;
             dataGridViewComputers_RMA.Columns[5].Width = 100;
             
-            // Стиль
+            
             dataGridViewComputers_RMA.RowHeadersVisible = false;
             dataGridViewComputers_RMA.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewComputers_RMA.DefaultCellStyle.SelectionBackColor = Color.Lavender;
@@ -72,7 +72,11 @@ namespace Tyuiu.RogozinaMA.Sprint7.Project.V12
             fileMenu.DropDownItems.Add(new ToolStripMenuItem("🗑️ Очистить", null, ClearClick));
             fileMenu.DropDownItems.Add(new ToolStripSeparator());
             fileMenu.DropDownItems.Add(new ToolStripMenuItem("🚪 Выход", null, buttonExit_RMA_Click));
-            
+
+            fileMenu.DropDownItems.Add(new ToolStripMenuItem("🏪 Фирмы", null, ShowVendors));
+            fileMenu.DropDownItems.Add(new ToolStripSeparator());
+            fileMenu.DropDownItems.Add(new ToolStripMenuItem("🚪 Выход", null, buttonExit_RMA_Click));
+
             var editMenu = new ToolStripMenuItem("✏️ Редактирование");
             editMenu.DropDownItems.Add(new ToolStripMenuItem("➕ Добавить", null, AddClick));
             editMenu.DropDownItems.Add(new ToolStripMenuItem("✏️ Редактировать", null, EditClick));
@@ -99,21 +103,21 @@ namespace Tyuiu.RogozinaMA.Sprint7.Project.V12
             MessageBox.Show($"Загружено {computers.Count} компьютеров! 💖", "Успех");
         }
 
-        // ГЛАВНЫЙ МЕТОД - ПОКАЗАТЬ ДАННЫЕ В ТАБЛИЦЕ
+        //  ДАННЫЕ В ТАБЛИЦЕ
         private void ShowData(List<DataService.Computer> list)
         {
-            // ПРОВЕРЯЕМ, ЕСТЬ ЛИ КОЛОНКИ
+          
             if (dataGridViewComputers_RMA.Columns.Count == 0)
             {
                 MessageBox.Show("Колонки не созданы! Создаем...", "Внимание");
-                CreateDataGridViewColumns(); // СОЗДАЕМ КОЛОНКИ, ЕСЛИ ИХ НЕТ
+                CreateDataGridViewColumns(); 
             }
             
-            dataGridViewComputers_RMA.Rows.Clear(); // Очищаем старые строки
+            dataGridViewComputers_RMA.Rows.Clear(); 
             
             foreach (var comp in list)
             {
-                // ТЕПЕРЬ МОЖНО ДОБАВЛЯТЬ - КОЛОНКИ ЕСТЬ!
+            
                 dataGridViewComputers_RMA.Rows.Add(
                     comp.Manufacturer,
                     comp.ProcessorType,
@@ -125,7 +129,7 @@ namespace Tyuiu.RogozinaMA.Sprint7.Project.V12
             }
         }
 
-        // =========== ОСТАЛЬНЫЕ МЕТОДЫ (не меняем) ===========
+        // =========== ОСТАЛЬНЫЕ МЕТОДЫ  ===========
         private void buttonStats_RMA_Click(object sender, EventArgs e)
         {
             if (computers.Count == 0)
@@ -274,6 +278,13 @@ namespace Tyuiu.RogozinaMA.Sprint7.Project.V12
             }
         }
 
+        private void ShowVendors(object? sender, EventArgs e)
+        {
+            var vendors = dataService.GetTestVendors();
+            var form = new FormVendors_RMA(vendors);
+            form.ShowDialog();
+        } 
+
         // =========== ФУНКЦИИ МЕНЮ ===========
         private void AddClick(object? sender, EventArgs e)
         {
@@ -391,7 +402,7 @@ namespace Tyuiu.RogozinaMA.Sprint7.Project.V12
                 "💕 Сделано с любовью для учебы!",
                 "Руководство");
         }
-    } // <-- это закрывающая скобка класса FormMain_RMA
+    } 
 
     // =========== ФОРМА РЕДАКТИРОВАНИЯ КОМПЬЮТЕРА ===========
     public class FormEditComputer_RMA : Form
@@ -514,7 +525,6 @@ namespace Tyuiu.RogozinaMA.Sprint7.Project.V12
                 buttonCancel.Click += ButtonCancel_Click;
             }
 
-            // Добавление элементов на форму
             List<Control> controls = new List<Control>
             {
                 labelManufacturer, labelProcessor, labelFrequency, labelRAM, labelHDD, labelDate
@@ -615,6 +625,7 @@ namespace Tyuiu.RogozinaMA.Sprint7.Project.V12
             DrawChart();
         }
 
+
         private void InitializeComponent()
         {
             this.Text = "📊 График - Распределение ОЗУ";
@@ -646,7 +657,7 @@ namespace Tyuiu.RogozinaMA.Sprint7.Project.V12
             {
                 g.Clear(Color.White);
 
-                // Найти максимальное значение ОЗУ
+                //  максимальное значение ОЗУ
                 int maxRAM = 0;
                 foreach (var comp in computers)
                 {
@@ -659,11 +670,11 @@ namespace Tyuiu.RogozinaMA.Sprint7.Project.V12
                 int startY = bmp.Height - 80;
                 int chartHeight = bmp.Height - 120;
 
-                // Нарисовать оси
+                //  оси
                 g.DrawLine(Pens.Black, startX - 10, startY, bmp.Width - 20, startY); // X ось
                 g.DrawLine(Pens.Black, startX, 40, startX, startY + 10); // Y ось
 
-                // Нарисовать столбцы
+                //  столбцы
                 Random rand = new Random();
                 for (int i = 0; i < computers.Count; i++)
                 {

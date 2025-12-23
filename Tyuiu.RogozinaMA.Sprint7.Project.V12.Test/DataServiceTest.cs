@@ -13,7 +13,7 @@ namespace Tyuiu.RogozinaMA.Sprint7.Project.V12.Test
         {
             DataService ds = new DataService();
             var computers = ds.GetTestComputers();
-            Assert.AreEqual(5, computers.Count); // Исправлено!
+            Assert.AreEqual(5, computers.Count); 
         }
 
         [TestMethod]

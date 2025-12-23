@@ -19,6 +19,15 @@ namespace Tyuiu.RogozinaMA.Sprint7.Project.V12.Lib
             public Computer() { }
         }
 
+       //Класс Фирмы-реализаторы
+        public class Vendor
+        {
+            public string Name { get; set; } = "";
+            public string Address { get; set; } = "";
+            public string Phone { get; set; } = "";
+            public string Notes { get; set; } = "";
+        }
+
 
 
 
@@ -32,6 +41,19 @@ namespace Tyuiu.RogozinaMA.Sprint7.Project.V12.Lib
                 new Computer { Manufacturer = "Lenovo", ProcessorType = "Intel i7", ClockSpeed = 4.0, RAM = 32, HDD = 2000, ReleaseDate = new DateTime(2023, 10, 10) },
                 new Computer { Manufacturer = "Apple", ProcessorType = "M2 Pro", ClockSpeed = 3.5, RAM = 16, HDD = 512, ReleaseDate = new DateTime(2023, 1, 24) },
                 new Computer { Manufacturer = "Asus", ProcessorType = "Intel i9", ClockSpeed = 5.0, RAM = 64, HDD = 4000, ReleaseDate = new DateTime(2023, 12, 5) }
+            };
+        }
+
+        // Тестовые данные для фирм
+        public List<Vendor> GetTestVendors()
+        {
+            return new List<Vendor>
+            {
+                new Vendor { Name = "DNS", Address = "ул. Ленина, 25", Phone = "+7 (495) 123-45-67", Notes = "Официальный дилер Dell" },
+                new Vendor { Name = "М.Видео", Address = "пр. Мира, 100", Phone = "+7 (800) 200-77-55", Notes = "Скидки студентам" },
+                new Vendor { Name = "Эльдорадо", Address = "ул. Советская, 15", Phone = "+7 (495) 987-65-43", Notes = "Рассрочка 0%" },
+                new Vendor { Name = "Ситилинк", Address = "ул. Центральная, 77", Phone = "+7 (812) 333-22-11", Notes = "Бесплатная доставка" },
+                new Vendor { Name = "OZON", Address = "онлайн", Phone = "8-800-444-55-66", Notes = "Интернет-магазин" }
             };
         }
 

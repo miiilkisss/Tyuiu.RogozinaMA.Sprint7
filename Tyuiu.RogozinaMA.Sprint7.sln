@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tyuiu.RogozinaMA.Sprint7.Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tyuiu.RogozinaMA.Sprint7.Project.V12.Test", "Tyuiu.RogozinaMA.Sprint7.Project.V12.Test\Tyuiu.RogozinaMA.Sprint7.Project.V12.Test.csproj", "{72AC83D3-686F-4719-B0DB-C855EC355B54}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project.V12", "Project.V12", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F2240BB9-6895-4983-9617-22215085E272} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{71474992-22FF-4D80-8D4B-860D62304FC0} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{72AC83D3-686F-4719-B0DB-C855EC355B54} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E89C7B3A-D62C-4F1E-A660-263CDFDBCBB9}
