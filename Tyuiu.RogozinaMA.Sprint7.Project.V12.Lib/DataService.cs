@@ -1,98 +1,70 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 
 namespace Tyuiu.RogozinaMA.Sprint7.Project.V12.Lib
 {
     public class DataService
     {
+        // Класс для компьютеров
         public class Computer
         {
             public string Manufacturer { get; set; } = "";
             public string ProcessorType { get; set; } = "";
-            public double ClockSpeed { get; set; }
-            public int RAM { get; set; }
-            public int HDD { get; set; }
+            public double ClockSpeed { get; set; } // GHz
+            public int RAM { get; set; } // GB
+            public int HDD { get; set; } // GB
             public DateTime ReleaseDate { get; set; }
 
             public Computer() { }
-
-            public Computer(string manufacturer, string processorType, double clockSpeed,
-                           int ram, int hdd, DateTime releaseDate)
-            {
-                Manufacturer = manufacturer;
-                ProcessorType = processorType;
-                ClockSpeed = clockSpeed;
-                RAM = ram;
-                HDD = hdd;
-                ReleaseDate = releaseDate;
-            }
         }
 
-        // Поиск
-        public List<Computer> SearchComputers(List<Computer> computers, string searchTerm)
-        {
-            if (string.IsNullOrEmpty(searchTerm))
-                return computers;
 
-            return computers.Where(c =>
-                c.Manufacturer.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-                c.ProcessorType.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-                c.RAM.ToString().Contains(searchTerm)).ToList();
-        }
 
-        // Сортировка
-        public List<Computer> SortComputers(List<Computer> computers, string sortBy, bool ascending = true)
-        {
-            switch (sortBy.ToLower())
-            {
-                case "производитель":
-                case "manufacturer":
-                    return ascending ?
-                        computers.OrderBy(c => c.Manufacturer).ToList() :
-                        computers.OrderByDescending(c => c.Manufacturer).ToList();
 
-                case "озу":
-                case "ram":
-                    return ascending ?
-                        computers.OrderBy(c => c.RAM).ToList() :
-                        computers.OrderByDescending(c => c.RAM).ToList();
-
-                case "hdd":
-                    return ascending ?
-                        computers.OrderBy(c => c.HDD).ToList() :
-                        computers.OrderByDescending(c => c.HDD).ToList();
-
-                case "частота":
-                case "clockspeed":
-                    return ascending ?
-                        computers.OrderBy(c => c.ClockSpeed).ToList() :
-                        computers.OrderByDescending(c => c.ClockSpeed).ToList();
-
-                default:
-                    return computers;
-            }
-        }
-
-        // Фильтрация
-        public List<Computer> FilterComputers(List<Computer> computers, int minRAM, int maxRAM, int minHDD, int maxHDD)
-        {
-            return computers.Where(c =>
-                c.RAM >= minRAM && c.RAM <= maxRAM &&
-                c.HDD >= minHDD && c.HDD <= maxHDD).ToList();
-        }
-
+        // Тестовые данные для компьютеров
         public List<Computer> GetTestComputers()
         {
             return new List<Computer>
             {
-                new Computer("Apple", "M2", 3.5, 16, 512, new DateTime(2023, 6, 15)),
-                new Computer("Dell", "Intel i5", 3.2, 8, 512, new DateTime(2023, 1, 15)),
-                new Computer("HP", "AMD Ryzen 5", 3.6, 16, 1000, new DateTime(2023, 3, 20)),
-                new Computer("Lenovo", "Intel i7", 4.0, 32, 2000, new DateTime(2023, 5, 10)),
-                new Computer("Asus", "AMD Ryzen 7", 3.8, 16, 1000, new DateTime(2023, 4, 25)),
-                new Computer("Acer", "Intel i3", 2.8, 4, 256, new DateTime(2022, 11, 30)),
-                new Computer("MSI", "Intel i9", 5.0, 64, 4000, new DateTime(2023, 6, 15))
+                new Computer { Manufacturer = "Dell", ProcessorType = "Intel i5", ClockSpeed = 3.2, RAM = 8, HDD = 512, ReleaseDate = new DateTime(2023, 5, 15) },
+                new Computer { Manufacturer = "HP", ProcessorType = "AMD Ryzen 7", ClockSpeed = 3.8, RAM = 16, HDD = 1000, ReleaseDate = new DateTime(2023, 8, 20) },
+                new Computer { Manufacturer = "Lenovo", ProcessorType = "Intel i7", ClockSpeed = 4.0, RAM = 32, HDD = 2000, ReleaseDate = new DateTime(2023, 10, 10) },
+                new Computer { Manufacturer = "Apple", ProcessorType = "M2 Pro", ClockSpeed = 3.5, RAM = 16, HDD = 512, ReleaseDate = new DateTime(2023, 1, 24) },
+                new Computer { Manufacturer = "Asus", ProcessorType = "Intel i9", ClockSpeed = 5.0, RAM = 64, HDD = 4000, ReleaseDate = new DateTime(2023, 12, 5) }
             };
         }
+
+        public List<Computer> SearchComputers(List<Computer> computers, string searchText)
+        {
+            if (string.IsNullOrEmpty(searchText))
+                return computers;
+
+            var results = new List<Computer>();
+            foreach (var comp in computers)
+            {
+                if (comp.Manufacturer.ToLower().Contains(searchText.ToLower()) ||
+                    comp.ProcessorType.ToLower().Contains(searchText.ToLower()))
+                {
+                    results.Add(comp);
+                }
+            }
+            return results;
+        }
+
+        public List<Computer> FilterComputers(List<Computer> computers, int minRAM, int maxRAM, int minHDD, int maxHDD)
+        {
+            var filtered = new List<Computer>();
+            foreach (var comp in computers)
+            {
+                if (comp.RAM >= minRAM && comp.RAM <= maxRAM &&
+                    comp.HDD >= minHDD && comp.HDD <= maxHDD)
+                {
+                    filtered.Add(comp);
+                }
+            }
+            return filtered;
+        }
+
     }
 }
